@@ -13,14 +13,12 @@ import CustomInput from '../../components/common/CustomInput';
 import CustomButton from '../../components/common/CustomButton';
 
 import { useTheme } from '../../hooks/useTheme';
-
-// import { AuthContext } from '../../store/AuthContext';
 import { useAppDispatch } from '../../redux/hooks';
 
 import { setUser } from '../../redux/slices/authSlice';
 import Toast from 'react-native-toast-message';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { createUser } from '../../database/services/userService';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 type FormData = {
@@ -85,6 +83,14 @@ const SignupScreen = () => {
         address: data.address,
       }),
     );
+
+    createUser({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      address: data.address,
+    });
 
     Toast.show({
       type: 'success',

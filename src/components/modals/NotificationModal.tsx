@@ -119,7 +119,7 @@
 //   },
 
 //   modalContainer: {
-//     height: '75%',
+//     height: '99%',
 
 //     borderTopLeftRadius: 24,
 
@@ -202,7 +202,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { useTheme } from '../../hooks/useTheme';
 
-import { notificationData } from '../../data/notificationData';
+// import { notificationData } from '../../data/notificationData';
+import { useAppSelector } from '../../redux/hooks';
 
 type Props = {
   visible: boolean;
@@ -214,6 +215,9 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const NotificationModal = ({ visible, onClose }: Props) => {
   const { theme } = useTheme();
+  const notifications = useAppSelector(
+    state => state.notification.notifications,
+  );
 
   const slideAnim = useRef(new Animated.Value(SCREEN_WIDTH)).current;
 
@@ -291,7 +295,7 @@ const NotificationModal = ({ visible, onClose }: Props) => {
           {/* Notification List */}
 
           <FlatList
-            data={notificationData}
+            data={notifications}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
@@ -332,6 +336,31 @@ const NotificationModal = ({ visible, onClose }: Props) => {
                     <Text style={styles.time}>{item.time}</Text>
                   </View>
                 </View>
+              </View>
+            )}
+            // eslint-disable-next-line react/no-unstable-nested-components
+            ListEmptyComponent={() => (
+              <View
+                style={{
+                  marginTop: 100,
+                  alignItems: 'center',
+                }}
+              >
+                <Ionicons
+                  name="notifications-off-outline"
+                  size={70}
+                  color="gray"
+                />
+
+                <Text
+                  style={{
+                    marginTop: 20,
+                    fontSize: 18,
+                    color: theme.text,
+                  }}
+                >
+                  No Notifications
+                </Text>
               </View>
             )}
           />
@@ -426,3 +455,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+////old one////

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "276860721228",
+    "project_id": "mycgapp-16dbe",
+    "storage_bucket": "mycgapp-16dbe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276860721228:android:02a3949831969f388b3ce9",
+        "android_client_info": {
+          "package_name": "com.mycgapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVcT9thKexcL8L2yzIEPC5RBZh23pZQck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

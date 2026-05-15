@@ -12,7 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import BottomTabNavigator from './BottomTabNavigator';
 import { DrawerParamList } from './types';
-import { createStyles } from './DrawerNavigator';
+import { createStyles } from './DrawerNavigatorCSS';
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 

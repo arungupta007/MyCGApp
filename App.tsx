@@ -13,8 +13,14 @@ import { ThemeProvider } from './src/store/ThemeContext';
 import { AuthProvider } from './src/store/AuthContext';
 
 import { store } from './src/redux/store';
+import { useEffect } from 'react';
+
+import NotificationService from './src/services/notificationService';
 
 const App = () => {
+  useEffect(() => {
+    NotificationService.requestPermission();
+  }, []);
   return (
     <Provider store={store}>
       <ThemeProvider>

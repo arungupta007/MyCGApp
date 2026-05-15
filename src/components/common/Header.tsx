@@ -64,16 +64,13 @@
 // });
 ///////new ////
 import React, { useState } from 'react';
-
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import { DrawerActions, useNavigation } from '@react-navigation/native';
-
 import { useTheme } from '../../hooks/useTheme';
-
 import NotificationModal from '../modals/NotificationModal';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { addNotification } from '../../redux/slices/notificationSlice';
 
 type Props = {
   title: string;
@@ -92,10 +89,35 @@ const Header = ({
   showBackButton = false,
 }: Props) => {
   const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch();
 
   const { theme } = useTheme();
 
   const [notificationVisible, setNotificationVisible] = useState(false);
+  const handleNotificationPress = () => {
+    dispatch(
+      addNotification({
+        id: Date.now().toString(),
+
+        title: 'New Property Added',
+
+        message: '2 new premium properties available.',
+
+        time: 'Just now',
+
+        read: false,
+      }),
+    );
+
+    setNotificationVisible(true);
+  };
+
+  const notifications = useAppSelector(
+    state => state.notification.notifications,
+  );
+
+  const unreadCount = notifications.filter(item => !item.read).length;
+  console.log('Unread Notifications:', unreadCount);
 
   return (
     <>
@@ -135,12 +157,25 @@ const Header = ({
 
         <View style={styles.rightContainer}>
           {showNotification ? (
-            <TouchableOpacity onPress={() => setNotificationVisible(true)}>
-              <Ionicons
+            <TouchableOpacity onPress={handleNotificationPress}>
+              {/* <Ionicons
                 name="notifications-outline"
                 size={26}
                 color={theme.text}
-              />
+              /> */}
+              <View>
+                <Ionicons
+                  name="notifications-outline"
+                  size={26}
+                  color={theme.text}
+                />
+
+                {unreadCount > 0 && (
+                  <View style={styles.counterbadge}>
+                    <Text style={styles.countPosition}>{unreadCount}</Text>
+                  </View>
+                )}
+              </View>
             </TouchableOpacity>
           ) : (
             <View style={{ width: 26 }} />
@@ -188,6 +223,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
 
+    fontWeight: '700',
+  },
+  counterbadge: {
+    position: 'absolute',
+    right: -4,
+    top: -4,
+    backgroundColor: 'red',
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  countPosition: {
+    color: '#fff',
+    fontSize: 10,
     fontWeight: '700',
   },
 });
