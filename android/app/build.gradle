@@ -2,6 +2,21 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+repositories {
+    google()
+    mavenCentral()
+    maven { url "https://maven.google.com" }
+    maven { url 'https://www.jitpack.io' }
+    maven { url "https://repo.maven.apache.org/maven2" }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+        metadataSources { gradleMetadata() }
+    }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases/"
+    }
+}
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -71,6 +86,13 @@ def enableProguardInReleaseBuilds = false
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
+
+// Configure react-native-vector-icons
+project.ext.vectoricons = [
+    iconFontNames: [ 'Ionicons.ttf', 'MaterialIcons.ttf', 'MaterialCommunityIcons.ttf', 'FontAwesome.ttf', 'Foundation.ttf', 'SimpleLineIcons.ttf', 'EvilIcons.ttf', 'Entypo.ttf', 'AntDesign.ttf', 'Feather.ttf', 'Zocial.ttf', 'Octicons.ttf' ]
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 android {
     ndkVersion rootProject.ext.ndkVersion
