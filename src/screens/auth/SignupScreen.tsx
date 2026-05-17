@@ -13,12 +13,21 @@ import CustomInput from '../../components/common/CustomInput';
 import CustomButton from '../../components/common/CustomButton';
 
 import { useTheme } from '../../hooks/useTheme';
+<<<<<<< HEAD
+=======
+
+// import { AuthContext } from '../../store/AuthContext';
+>>>>>>> 1d4a312 (initial commit)
 import { useAppDispatch } from '../../redux/hooks';
 
 import { setUser } from '../../redux/slices/authSlice';
 import Toast from 'react-native-toast-message';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+<<<<<<< HEAD
 import { createUser } from '../../database/services/userService';
+=======
+
+>>>>>>> 1d4a312 (initial commit)
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 type FormData = {
@@ -84,6 +93,7 @@ const SignupScreen = () => {
       }),
     );
 
+<<<<<<< HEAD
     createUser({
       firstName: data.firstName,
       lastName: data.lastName,
@@ -92,6 +102,8 @@ const SignupScreen = () => {
       address: data.address,
     });
 
+=======
+>>>>>>> 1d4a312 (initial commit)
     Toast.show({
       type: 'success',
       position: 'top',

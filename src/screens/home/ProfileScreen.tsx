@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState, useEffect } from 'react';
 // import {
 //   View,
@@ -580,6 +581,9 @@
 ///////new/////
 import React, { useState, useEffect } from 'react';
 
+=======
+import React, { useState, useEffect } from 'react';
+>>>>>>> 1d4a312 (initial commit)
 import {
   View,
   Text,
@@ -604,13 +608,17 @@ import { setUser } from '../../redux/slices/authSlice';
 
 import Toast from 'react-native-toast-message';
 
+<<<<<<< HEAD
 import { getUser, updateUser } from '../../database/services/userService';
 
+=======
+>>>>>>> 1d4a312 (initial commit)
 const ProfileScreen = () => {
   const { theme } = useTheme();
 
   const dispatch = useAppDispatch();
 
+<<<<<<< HEAD
   // -----------------------------
   // REDUX USER
   // -----------------------------
@@ -625,6 +633,9 @@ const ProfileScreen = () => {
   // USER PRIORITY
   // -----------------------------
   const user = realmUser || reduxUser;
+=======
+  const user = useAppSelector(state => state.auth.user);
+>>>>>>> 1d4a312 (initial commit)
 
   const styles = createStyles(theme);
 
@@ -634,24 +645,37 @@ const ProfileScreen = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   // -----------------------------
+<<<<<<< HEAD
   // FALLBACK DATA
   // -----------------------------
   const fallbackData = {
     firstName: 'Dummy',
     lastName: 'User',
+=======
+  // SAFE DEFAULT DATA
+  // -----------------------------
+  const fallbackData = {
+    firstName: 'Dummy',
+    lastName: 'Dummy',
+>>>>>>> 1d4a312 (initial commit)
     email: 'dummy@example.com',
     phoneNumber: '+91 99999 88888',
     address: '123 Main Street, New Delhi, India',
   };
 
   // -----------------------------
+<<<<<<< HEAD
   // PROFILE DATA
+=======
+  // MAIN DISPLAY DATA
+>>>>>>> 1d4a312 (initial commit)
   // -----------------------------
   const profileData = user || fallbackData;
 
   // -----------------------------
   // TEMP EDIT DATA
   // -----------------------------
+<<<<<<< HEAD
   const [tempData, setTempData] = useState({
     firstName: profileData.firstName,
     lastName: profileData.lastName,
@@ -666,6 +690,16 @@ const ProfileScreen = () => {
   useEffect(() => {
     setTempData(profileData);
   }, [reduxUser]);
+=======
+  const [tempData, setTempData] = useState(profileData);
+
+  // -----------------------------
+  // SYNC REDUX DATA
+  // -----------------------------
+  useEffect(() => {
+    setTempData(profileData);
+  }, [user]);
+>>>>>>> 1d4a312 (initial commit)
 
   // -----------------------------
   // HANDLE INPUT CHANGE
@@ -678,11 +712,16 @@ const ProfileScreen = () => {
   };
 
   // -----------------------------
+<<<<<<< HEAD
   // SAVE PROFILE
+=======
+  // SAVE TO REDUX
+>>>>>>> 1d4a312 (initial commit)
   // -----------------------------
   const onSave = () => {
     const updatedUser = {
       firstName: tempData.firstName.trim(),
+<<<<<<< HEAD
 
       lastName: tempData.lastName.trim(),
 
@@ -713,6 +752,18 @@ const ProfileScreen = () => {
     // -----------------------------
     // TOAST
     // -----------------------------
+=======
+      lastName: tempData.lastName.trim(),
+      email: tempData.email.trim(),
+      phoneNumber: tempData.phoneNumber.trim(),
+      address: tempData.address.trim(),
+    };
+
+    dispatch(setUser(updatedUser));
+
+    setIsEditing(false);
+
+>>>>>>> 1d4a312 (initial commit)
     Toast.show({
       type: 'success',
       text1: 'Profile Updated',
@@ -760,8 +811,13 @@ const ProfileScreen = () => {
                 ]}
               >
                 <Text style={styles.avatarText}>
+<<<<<<< HEAD
                   {profileData.firstName?.[0]}
                   {profileData.lastName?.[0]}
+=======
+                  {profileData.firstName[0]}
+                  {profileData.lastName[0]}
+>>>>>>> 1d4a312 (initial commit)
                 </Text>
               </View>
             </View>
@@ -836,7 +892,10 @@ const ProfileScreen = () => {
               ]}
               onPress={() => {
                 setTempData(profileData);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1d4a312 (initial commit)
                 setIsEditing(false);
               }}
             >

@@ -119,7 +119,11 @@
 //   },
 
 //   modalContainer: {
+<<<<<<< HEAD
 //     height: '99%',
+=======
+//     height: '75%',
+>>>>>>> 1d4a312 (initial commit)
 
 //     borderTopLeftRadius: 24,
 
@@ -202,8 +206,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { useTheme } from '../../hooks/useTheme';
 
+<<<<<<< HEAD
 // import { notificationData } from '../../data/notificationData';
 import { useAppSelector } from '../../redux/hooks';
+=======
+import { notificationData } from '../../data/notificationData';
+>>>>>>> 1d4a312 (initial commit)
 
 type Props = {
   visible: boolean;
@@ -215,9 +223,12 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const NotificationModal = ({ visible, onClose }: Props) => {
   const { theme } = useTheme();
+<<<<<<< HEAD
   const notifications = useAppSelector(
     state => state.notification.notifications,
   );
+=======
+>>>>>>> 1d4a312 (initial commit)
 
   const slideAnim = useRef(new Animated.Value(SCREEN_WIDTH)).current;
 
@@ -295,7 +306,11 @@ const NotificationModal = ({ visible, onClose }: Props) => {
           {/* Notification List */}
 
           <FlatList
+<<<<<<< HEAD
             data={notifications}
+=======
+            data={notificationData}
+>>>>>>> 1d4a312 (initial commit)
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
@@ -338,6 +353,7 @@ const NotificationModal = ({ visible, onClose }: Props) => {
                 </View>
               </View>
             )}
+<<<<<<< HEAD
             // eslint-disable-next-line react/no-unstable-nested-components
             ListEmptyComponent={() => (
               <View
@@ -363,6 +379,8 @@ const NotificationModal = ({ visible, onClose }: Props) => {
                 </Text>
               </View>
             )}
+=======
+>>>>>>> 1d4a312 (initial commit)
           />
         </Animated.View>
       </View>
@@ -455,4 +473,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+<<<<<<< HEAD
 ////old one////
+=======
+>>>>>>> 1d4a312 (initial commit)

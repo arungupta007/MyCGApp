@@ -64,6 +64,7 @@
 // });
 ///////new ////
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
@@ -71,6 +72,18 @@ import { useTheme } from '../../hooks/useTheme';
 import NotificationModal from '../modals/NotificationModal';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addNotification } from '../../redux/slices/notificationSlice';
+=======
+
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import { DrawerActions, useNavigation } from '@react-navigation/native';
+
+import { useTheme } from '../../hooks/useTheme';
+
+import NotificationModal from '../modals/NotificationModal';
+>>>>>>> 1d4a312 (initial commit)
 
 type Props = {
   title: string;
@@ -89,11 +102,15 @@ const Header = ({
   showBackButton = false,
 }: Props) => {
   const navigation = useNavigation<any>();
+<<<<<<< HEAD
   const dispatch = useAppDispatch();
+=======
+>>>>>>> 1d4a312 (initial commit)
 
   const { theme } = useTheme();
 
   const [notificationVisible, setNotificationVisible] = useState(false);
+<<<<<<< HEAD
   const handleNotificationPress = () => {
     dispatch(
       addNotification({
@@ -118,6 +135,8 @@ const Header = ({
 
   const unreadCount = notifications.filter(item => !item.read).length;
   console.log('Unread Notifications:', unreadCount);
+=======
+>>>>>>> 1d4a312 (initial commit)
 
   return (
     <>
@@ -157,6 +176,7 @@ const Header = ({
 
         <View style={styles.rightContainer}>
           {showNotification ? (
+<<<<<<< HEAD
             <TouchableOpacity onPress={handleNotificationPress}>
               {/* <Ionicons
                 name="notifications-outline"
@@ -176,6 +196,14 @@ const Header = ({
                   </View>
                 )}
               </View>
+=======
+            <TouchableOpacity onPress={() => setNotificationVisible(true)}>
+              <Ionicons
+                name="notifications-outline"
+                size={26}
+                color={theme.text}
+              />
+>>>>>>> 1d4a312 (initial commit)
             </TouchableOpacity>
           ) : (
             <View style={{ width: 26 }} />
@@ -225,6 +253,7 @@ const styles = StyleSheet.create({
 
     fontWeight: '700',
   },
+<<<<<<< HEAD
   counterbadge: {
     position: 'absolute',
     right: -4,
@@ -241,4 +270,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
   },
+=======
+>>>>>>> 1d4a312 (initial commit)
 });
