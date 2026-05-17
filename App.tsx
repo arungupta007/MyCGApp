@@ -20,6 +20,7 @@ import NotificationService from './src/services/notificationService';
 const App = () => {
   useEffect(() => {
     NotificationService.requestPermission();
+    //push notification test
   }, []);
   return (
     <Provider store={store}>
