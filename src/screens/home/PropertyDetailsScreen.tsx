@@ -200,7 +200,11 @@ const PropertyDetailsScreen = () => {
 
         <CustomButton
           title="Book An Appointment"
-          onPress={() => navigation.navigate('AppointmentForm')}
+          onPress={() =>
+            navigation.navigate('AppointmentForm', {
+              propertyId: property.home_id,
+            })
+          }
         />
       </ScrollView>
     </ScreenWrapper>

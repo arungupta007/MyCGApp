@@ -90,5 +90,9 @@ export const useStyles = () => {
       fontSize: 18,
       color: theme.text,
     },
+    emptyContainer: {
+      marginTop: 100,
+      alignItems: 'center',
+    },
   });
 };

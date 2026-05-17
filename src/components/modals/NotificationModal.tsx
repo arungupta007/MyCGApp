@@ -1,190 +1,3 @@
-// import React from 'react';
-
-// import {
-//   Modal,
-//   View,
-//   Text,
-//   StyleSheet,
-//   FlatList,
-//   TouchableOpacity,
-// } from 'react-native';
-
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-
-// import { useTheme } from '../../hooks/useTheme';
-
-// import { notificationData } from '../../data/notificationData';
-
-// type Props = {
-//   visible: boolean;
-
-//   onClose: () => void;
-// };
-
-// const NotificationModal = ({ visible, onClose }: Props) => {
-//   const { theme } = useTheme();
-
-//   return (
-//     <Modal visible={visible} animationType="slide" transparent>
-//       <View style={styles.overlay}>
-//         <View
-//           style={[
-//             styles.modalContainer,
-//             {
-//               backgroundColor: theme.background,
-//             },
-//           ]}
-//         >
-//           {/* Header */}
-
-//           <View style={styles.header}>
-//             <Text
-//               style={[
-//                 styles.title,
-//                 {
-//                   color: theme.text,
-//                 },
-//               ]}
-//             >
-//               Notifications
-//             </Text>
-
-//             <TouchableOpacity onPress={onClose}>
-//               <Ionicons name="close" size={28} color={theme.text} />
-//             </TouchableOpacity>
-//           </View>
-
-//           {/* Notification List */}
-
-//           <FlatList
-//             data={notificationData}
-//             keyExtractor={item => item.id}
-//             showsVerticalScrollIndicator={false}
-//             renderItem={({ item }) => (
-//               <View
-//                 style={[
-//                   styles.notificationCard,
-//                   {
-//                     backgroundColor: theme.card,
-//                   },
-//                 ]}
-//               >
-//                 <View style={styles.row}>
-//                   <Ionicons name="notifications" size={24} color="#4A90E2" />
-
-//                   <View style={styles.content}>
-//                     <Text
-//                       style={[
-//                         styles.notificationTitle,
-//                         {
-//                           color: theme.text,
-//                         },
-//                       ]}
-//                     >
-//                       {item.title}
-//                     </Text>
-
-//                     <Text
-//                       style={[
-//                         styles.message,
-//                         {
-//                           color: theme.text,
-//                         },
-//                       ]}
-//                     >
-//                       {item.message}
-//                     </Text>
-
-//                     <Text style={styles.time}>{item.time}</Text>
-//                   </View>
-//                 </View>
-//               </View>
-//             )}
-//           />
-//         </View>
-//       </View>
-//     </Modal>
-//   );
-// };
-
-// export default NotificationModal;
-
-// const styles = StyleSheet.create({
-//   overlay: {
-//     flex: 1,
-
-//     backgroundColor: 'rgba(0,0,0,0.5)',
-
-//     justifyContent: 'flex-end',
-//   },
-
-//   modalContainer: {
-//     height: '99%',
-
-//     borderTopLeftRadius: 24,
-
-//     borderTopRightRadius: 24,
-
-//     padding: 20,
-//   },
-
-//   header: {
-//     flexDirection: 'row',
-
-//     justifyContent: 'space-between',
-
-//     alignItems: 'center',
-
-//     marginBottom: 20,
-//   },
-
-//   title: {
-//     fontSize: 24,
-
-//     fontWeight: '700',
-//   },
-
-//   notificationCard: {
-//     borderRadius: 18,
-
-//     padding: 16,
-
-//     marginBottom: 16,
-
-//     elevation: 3,
-//   },
-
-//   row: {
-//     flexDirection: 'row',
-//   },
-
-//   content: {
-//     marginLeft: 14,
-
-//     flex: 1,
-//   },
-
-//   notificationTitle: {
-//     fontSize: 16,
-
-//     fontWeight: '700',
-//   },
-
-//   message: {
-//     marginTop: 6,
-
-//     lineHeight: 20,
-//   },
-
-//   time: {
-//     marginTop: 10,
-
-//     color: '#4A90E2',
-
-//     fontWeight: '600',
-//   },
-// });
-////////new///
 import React, { useEffect, useRef } from 'react';
 
 import {
@@ -201,8 +14,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useStyles } from './styles';
 import { useTheme } from '../../hooks/useTheme';
 
-// import { notificationData } from '../../data/notificationData';
-import { useAppSelector } from '../../redux/hooks';
+import { notificationData } from '../../data/notificationData';
+// import { useAppSelector } from '../../redux/hooks';
 
 type Props = {
   visible: boolean;
@@ -215,9 +28,9 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const NotificationModal = ({ visible, onClose }: Props) => {
   const { theme } = useTheme();
   const styles = useStyles();
-  const notifications = useAppSelector(
-    state => state.notification.notifications,
-  );
+  // const notifications = useAppSelector(
+  //   state => state.notification.notifications,
+  // );
 
   const slideAnim = useRef(new Animated.Value(SCREEN_WIDTH)).current;
 
@@ -295,7 +108,7 @@ const NotificationModal = ({ visible, onClose }: Props) => {
           {/* Notification List */}
 
           <FlatList
-            data={notifications}
+            data={notificationData}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
@@ -340,12 +153,7 @@ const NotificationModal = ({ visible, onClose }: Props) => {
             )}
             // eslint-disable-next-line react/no-unstable-nested-components
             ListEmptyComponent={() => (
-              <View
-                style={{
-                  marginTop: 100,
-                  alignItems: 'center',
-                }}
-              >
+              <View style={styles.emptyContainer}>
                 <Ionicons
                   name="notifications-off-outline"
                   size={70}

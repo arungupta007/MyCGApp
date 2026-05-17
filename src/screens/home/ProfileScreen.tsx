@@ -593,17 +593,11 @@ import {
 } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import { useTheme } from '../../hooks/useTheme';
-
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-
 import { setUser } from '../../redux/slices/authSlice';
-
 import Toast from 'react-native-toast-message';
-
 import { getUser, updateUser } from '../../database/services/userService';
 
 const ProfileScreen = () => {

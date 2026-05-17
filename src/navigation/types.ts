@@ -27,5 +27,7 @@ export type AppStackParamList = {
   PropertyDetails: {
     property: PropertyItem;
   };
-  AppointmentForm: undefined;
+  AppointmentForm: {
+    propertyId: string;
+  };
 };

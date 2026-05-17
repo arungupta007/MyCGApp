@@ -1,291 +1,247 @@
-// import React, { useEffect, useState } from 'react';
-
-// import { View, Text, FlatList, StyleSheet } from 'react-native';
-
-// import Loader from '../../components/common/Loader';
-
-// import Header from '../../components/common/Header';
-
-// import ScreenWrapper from '../../components/common/ScreenWrapper';
-
-// import { getTopHeadlines } from '../../services/newsService';
-
-// import { useTheme } from '../../hooks/useTheme';
-
-// const AppointmentsScreen = () => {
-//   const { theme } = useTheme();
-
-//   const [loading, setLoading] = useState(true);
-
-//   const [articles, setArticles] = useState<any[]>([]);
-
-//   useEffect(() => {
-//     fetchNews();
-//   }, []);
-
-//   const fetchNews = async () => {
-//     try {
-//       const data = await getTopHeadlines();
-
-//       setArticles(data.articles);
-//     } catch (error) {
-//       console.log(error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   if (loading) {
-//     return <Loader />;
-//   }
-
-//   return (
-//     <ScreenWrapper>
-//       <Header title="News" />
-
-//       <FlatList
-//         data={articles}
-//         keyExtractor={(_, index) => index.toString()}
-//         renderItem={({ item }) => (
-//           <View
-//             style={[
-//               styles.card,
-//               {
-//                 backgroundColor: theme.card,
-//               },
-//             ]}
-//           >
-//             <Text
-//               style={[
-//                 styles.title,
-//                 {
-//                   color: theme.text,
-//                 },
-//               ]}
-//             >
-//               {item.title}
-//             </Text>
-
-//             <Text
-//               style={[
-//                 styles.description,
-//                 {
-//                   color: theme.text,
-//                 },
-//               ]}
-//             >
-//               {item.description}
-//             </Text>
-//           </View>
-//         )}
-//       />
-//     </ScreenWrapper>
-//   );
-// };
-
-// export default AppointmentsScreen;
-
-// const styles = StyleSheet.create({
-//   card: {
-//     margin: 12,
-
-//     padding: 16,
-
-//     borderRadius: 14,
-
-//     elevation: 3,
-//   },
-
-//   title: {
-//     fontSize: 18,
-
-//     fontWeight: '700',
-//   },
-
-//   description: {
-//     marginTop: 10,
-
-//     fontSize: 14,
-//   },
-// });
-///
-import React from 'react';
-
-import { View, Text, StyleSheet, Alert } from 'react-native';
-
-import { Controller, useForm } from 'react-hook-form';
-
+import React, { useEffect, useState } from 'react';
+import {
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/common/AppHeader/AppHeader';
 
 import ScreenWrapper from '../../components/common/ScreenWrapper';
 
-import AppInput from '../../components/common/AppInput/AppInput';
-
-import CustomButton from '../../components/common/AppButton/AppButton';
-
 import { useTheme } from '../../hooks/useTheme';
 
-type FormData = {
-  title: string;
-  description: string;
-};
+import { getAppointments } from '../../database/services/appointmentService';
 
 const AppointmentsScreen = () => {
   const { theme } = useTheme();
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    defaultValues: {
-      title: '',
-      description: '',
-    },
-  });
+  const styles = createStyles(theme);
 
-  const onSubmit = (data: FormData) => {
-    console.log('Appointment Submitted =>', data);
+  const [appointments, setAppointments] = useState<any[]>([]);
 
-    Alert.alert('Success', 'Appointment submitted successfully');
+  useEffect(() => {
+    const data = getAppointments();
 
-    reset();
+    setAppointments([...data]);
+  }, []);
+
+  console.log('Appointments =>', appointments);
+
+  // -----------------------------
+  // RENDER APPOINTMENT CARD
+  // -----------------------------
+  const renderAppointmentCard = ({ item }: any) => {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.card,
+          },
+        ]}
+      >
+        {/* TOP ROW */}
+        <View style={styles.topRow}>
+          <View
+            style={[
+              styles.iconContainer,
+              {
+                backgroundColor: '#4A90E220',
+              },
+            ]}
+          >
+            <Ionicons name="calendar-outline" size={26} color="#4A90E2" />
+          </View>
+
+          <View style={styles.titleContainer}>
+            <Text
+              style={[
+                styles.title,
+                {
+                  color: theme.text,
+                },
+              ]}
+            >
+              {item.title}
+            </Text>
+
+            <Text style={styles.propertyId}>
+              Property ID: {item.propertyId}
+            </Text>
+          </View>
+        </View>
+
+        {/* DESCRIPTION */}
+        <Text
+          style={[
+            styles.description,
+            {
+              color: theme.text,
+            },
+          ]}
+        >
+          {item.description}
+        </Text>
+
+        {/* STATUS */}
+        <View style={styles.bottomRow}>
+          <View style={styles.statusContainer}>
+            <View style={styles.statusDot} />
+
+            <Text style={styles.statusText}>Appointment Requested</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
   };
 
   return (
-    <>
-      <ScreenWrapper>
-        <Header title="Appointments" showMenu showNotification />
-        <View style={styles.container}>
-          {/* Title */}
+    <ScreenWrapper>
+      <Header title="Appointments" showMenu showNotification />
 
-          <Text
-            style={[
-              styles.label,
-              {
-                color: theme.text,
-              },
-            ]}
-          >
-            Appointment Title
-          </Text>
+      <View style={styles.container}>
+        {/* TOTAL COUNT */}
+        <Text
+          style={[
+            styles.totalText,
+            {
+              color: theme.text,
+            },
+          ]}
+        >
+          {appointments.length} Appointments Found
+        </Text>
 
-          <Controller
-            control={control}
-            name="title"
-            rules={{
-              required: 'Title is required',
+        {/* EMPTY STATE */}
+        {appointments.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Ionicons name="document-text-outline" size={70} color="#B0B0B0" />
+
+            <Text
+              style={[
+                styles.emptyText,
+                {
+                  color: theme.text,
+                },
+              ]}
+            >
+              No appointments available
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={appointments}
+            keyExtractor={(item, index) => `${item.propertyId}-${index}`}
+            renderItem={renderAppointmentCard}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingBottom: 120,
             }}
-            render={({ field: { onChange, value } }) => (
-              <AppInput
-                placeholder="Enter appointment title"
-                value={value}
-                onChangeText={onChange}
-              />
-            )}
           />
-
-          {errors.title && (
-            <Text style={styles.error}>{errors.title.message}</Text>
-          )}
-
-          {/* Description */}
-
-          <Text
-            style={[
-              styles.label,
-              {
-                color: theme.text,
-              },
-            ]}
-          >
-            Description
-          </Text>
-
-          <Controller
-            control={control}
-            name="description"
-            rules={{
-              required: 'Description is required',
-              minLength: {
-                value: 10,
-                message: 'Minimum 10 characters',
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <AppInput
-                placeholder="Enter description"
-                value={value}
-                onChangeText={onChange}
-                multiline
-                numberOfLines={5}
-                style={styles.descriptionInput}
-              />
-            )}
-          />
-
-          {errors.description && (
-            <Text style={styles.error}>{errors.description.message}</Text>
-          )}
-
-          {/* Submit Button */}
-
-          <CustomButton
-            title="Submit Appointment"
-            onPress={handleSubmit(onSubmit)}
-          />
-        </View>
-      </ScreenWrapper>
-    </>
+        )}
+      </View>
+    </ScreenWrapper>
   );
 };
 
 export default AppointmentsScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingHorizontal: 16,
+      paddingTop: 10,
+    },
 
-    paddingHorizontal: 20,
+    totalText: {
+      fontSize: 16,
+      fontWeight: '600',
+      marginBottom: 18,
+    },
 
-    paddingTop: 20,
-  },
+    card: {
+      borderRadius: 18,
+      padding: 18,
+      marginBottom: 16,
+      elevation: 3,
+    },
 
-  label: {
-    fontSize: 16,
+    topRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
 
-    fontWeight: '600',
+    iconContainer: {
+      width: 56,
+      height: 56,
+      borderRadius: 14,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
 
-    marginTop: 20,
+    titleContainer: {
+      flex: 1,
+      marginLeft: 14,
+    },
 
-    marginBottom: 10,
-  },
+    title: {
+      fontSize: 18,
+      fontWeight: '700',
+    },
 
-  descriptionInput: {
-    height: 140,
+    propertyId: {
+      marginTop: 6,
+      color: '#4A90E2',
+      fontWeight: '600',
+      fontSize: 13,
+    },
 
-    textAlignVertical: 'top',
+    description: {
+      marginTop: 18,
+      lineHeight: 22,
+      fontSize: 15,
+    },
 
-    paddingTop: 14,
-  },
+    bottomRow: {
+      marginTop: 20,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
 
-  error: {
-    color: 'red',
+    statusContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
 
-    marginTop: 6,
+    statusDot: {
+      width: 10,
+      height: 10,
+      borderRadius: 10,
+      backgroundColor: '#34C759',
+      marginRight: 8,
+    },
 
-    marginLeft: 5,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 20,
-  },
+    statusText: {
+      color: '#34C759',
+      fontWeight: '700',
+    },
 
-  headerTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-  },
-});
+    emptyContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 100,
+    },
+
+    emptyText: {
+      marginTop: 16,
+      fontSize: 18,
+      fontWeight: '600',
+    },
+  });

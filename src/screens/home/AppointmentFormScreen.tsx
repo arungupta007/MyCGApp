@@ -19,16 +19,22 @@ import CustomButton from '../../components/common/AppButton/AppButton';
 import { useTheme } from '../../hooks/useTheme';
 
 import { AppStackParamList } from '../../navigation/types';
-
+import { createAppointment } from '../../database/services/appointmentService';
+import { RouteProp, useRoute } from '@react-navigation/native';
 type FormData = {
   title: string;
   description: string;
 };
 
+type AppointmentFormRouteProp = RouteProp<AppStackParamList, 'AppointmentForm'>;
+
 type NavigationProp = NativeStackNavigationProp<AppStackParamList>;
 
 const AppointmentFormScreen = () => {
   const navigation = useNavigation<NavigationProp>();
+  const route = useRoute<AppointmentFormRouteProp>();
+
+  const { propertyId } = route.params;
 
   const { theme } = useTheme();
 
@@ -46,11 +52,12 @@ const AppointmentFormScreen = () => {
 
   const onSubmit = (data: FormData) => {
     console.log('Appointment Submitted =>', data);
-
-    Alert.alert('Success', 'Appointment booked successfully');
-
+    const success = createAppointment(data.title, data.description, propertyId);
+    console.log('Appointment Creation Success =>', success);
+    if (success) {
+      Alert.alert('Success', 'Appointment booked successfully');
+    }
     reset();
-
     navigation.navigate('MainApp');
   };
 

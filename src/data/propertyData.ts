@@ -1,6 +1,6 @@
 export const propertyData = {
   town: {
-    name: 'Example Town',
+    name: 'New York Town',
     coordinates: {
       latitude: 17.385,
       longitude: 78.4867,
