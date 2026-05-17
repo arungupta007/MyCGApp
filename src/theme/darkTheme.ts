@@ -5,4 +5,5 @@ export const darkTheme = {
   text: COLORS.white,
   card: '#1E1E1E',
   primary: COLORS.primary,
+  border: '#333333',
 };

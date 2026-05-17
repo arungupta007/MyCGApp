@@ -5,4 +5,5 @@ export const lightTheme = {
   text: COLORS.black,
   card: COLORS.white,
   primary: COLORS.primary,
+  border: '#E0E0E0',
 };
