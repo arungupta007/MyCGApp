@@ -115,13 +115,13 @@ import { View, Text, StyleSheet, Alert } from 'react-native';
 
 import { Controller, useForm } from 'react-hook-form';
 
-import Header from '../../components/common/Header';
+import Header from '../../components/common/AppHeader/AppHeader';
 
 import ScreenWrapper from '../../components/common/ScreenWrapper';
 
-import CustomInput from '../../components/common/CustomInput';
+import AppInput from '../../components/common/AppInput/AppInput';
 
-import CustomButton from '../../components/common/CustomButton';
+import CustomButton from '../../components/common/AppButton/AppButton';
 
 import { useTheme } from '../../hooks/useTheme';
 
@@ -178,7 +178,7 @@ const AppointmentsScreen = () => {
               required: 'Title is required',
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Enter appointment title"
                 value={value}
                 onChangeText={onChange}
@@ -214,7 +214,7 @@ const AppointmentsScreen = () => {
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Enter description"
                 value={value}
                 onChangeText={onChange}

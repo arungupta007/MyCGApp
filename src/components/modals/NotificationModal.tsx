@@ -119,11 +119,7 @@
 //   },
 
 //   modalContainer: {
-<<<<<<< HEAD
 //     height: '99%',
-=======
-//     height: '75%',
->>>>>>> 1d4a312 (initial commit)
 
 //     borderTopLeftRadius: 24,
 
@@ -195,7 +191,6 @@ import {
   Modal,
   View,
   Text,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
   Animated,
@@ -203,15 +198,11 @@ import {
 } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { useStyles } from './styles';
 import { useTheme } from '../../hooks/useTheme';
 
-<<<<<<< HEAD
 // import { notificationData } from '../../data/notificationData';
 import { useAppSelector } from '../../redux/hooks';
-=======
-import { notificationData } from '../../data/notificationData';
->>>>>>> 1d4a312 (initial commit)
 
 type Props = {
   visible: boolean;
@@ -223,12 +214,10 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const NotificationModal = ({ visible, onClose }: Props) => {
   const { theme } = useTheme();
-<<<<<<< HEAD
+  const styles = useStyles();
   const notifications = useAppSelector(
     state => state.notification.notifications,
   );
-=======
->>>>>>> 1d4a312 (initial commit)
 
   const slideAnim = useRef(new Animated.Value(SCREEN_WIDTH)).current;
 
@@ -306,11 +295,7 @@ const NotificationModal = ({ visible, onClose }: Props) => {
           {/* Notification List */}
 
           <FlatList
-<<<<<<< HEAD
             data={notifications}
-=======
-            data={notificationData}
->>>>>>> 1d4a312 (initial commit)
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
@@ -353,7 +338,6 @@ const NotificationModal = ({ visible, onClose }: Props) => {
                 </View>
               </View>
             )}
-<<<<<<< HEAD
             // eslint-disable-next-line react/no-unstable-nested-components
             ListEmptyComponent={() => (
               <View
@@ -368,19 +352,9 @@ const NotificationModal = ({ visible, onClose }: Props) => {
                   color="gray"
                 />
 
-                <Text
-                  style={{
-                    marginTop: 20,
-                    fontSize: 18,
-                    color: theme.text,
-                  }}
-                >
-                  No Notifications
-                </Text>
+                <Text style={styles.noNotificationsText}>No Notifications</Text>
               </View>
             )}
-=======
->>>>>>> 1d4a312 (initial commit)
           />
         </Animated.View>
       </View>
@@ -389,91 +363,3 @@ const NotificationModal = ({ visible, onClose }: Props) => {
 };
 
 export default NotificationModal;
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    zIndex: 9999,
-    elevation: 9999,
-  },
-  backdrop: {
-    flex: 1,
-
-    backgroundColor: 'rgba(0,0,0,0.4)',
-  },
-  modalContainer: {
-    width: '95%',
-    height: '100%',
-    padding: 20,
-    elevation: 10,
-  },
-
-  header: {
-    flexDirection: 'row',
-
-    justifyContent: 'space-between',
-
-    alignItems: 'center',
-
-    marginBottom: 20,
-
-    marginTop: 20,
-  },
-
-  title: {
-    fontSize: 24,
-
-    fontWeight: '700',
-  },
-
-  notificationCard: {
-    borderRadius: 18,
-
-    padding: 16,
-
-    marginBottom: 16,
-
-    elevation: 3,
-  },
-
-  row: {
-    flexDirection: 'row',
-  },
-
-  content: {
-    marginLeft: 14,
-
-    flex: 1,
-  },
-
-  notificationTitle: {
-    fontSize: 16,
-
-    fontWeight: '700',
-  },
-
-  message: {
-    marginTop: 6,
-
-    lineHeight: 20,
-  },
-
-  time: {
-    marginTop: 10,
-
-    color: '#4A90E2',
-
-    fontWeight: '600',
-  },
-});
-<<<<<<< HEAD
-////old one////
-=======
->>>>>>> 1d4a312 (initial commit)

@@ -12,9 +12,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import ScreenWrapper from '../../components/common/ScreenWrapper';
 
-import CustomInput from '../../components/common/CustomInput';
+import AppInput from '../../components/common/AppInput/AppInput';
 
-import CustomButton from '../../components/common/CustomButton';
+import CustomButton from '../../components/common/AppButton/AppButton';
 
 import { useTheme } from '../../hooks/useTheme';
 
@@ -113,7 +113,7 @@ const AppointmentFormScreen = () => {
             required: 'Title is required',
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Enter title"
               value={value}
               onChangeText={onChange}
@@ -151,7 +151,7 @@ const AppointmentFormScreen = () => {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Enter description"
               value={value}
               onChangeText={onChange}

@@ -48,20 +48,18 @@ import React, { useState } from 'react';
 import {
   View,
   TextInput,
-  StyleSheet,
   TextInputProps,
   TouchableOpacity,
 } from 'react-native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-import { useTheme } from '../../hooks/useTheme';
+import { styles } from './styles';
+import { useTheme } from '../../../hooks/useTheme';
 
 type Props = TextInputProps & {
   secureTextEntry?: boolean;
 };
 
-const CustomInput = ({ secureTextEntry = false, style, ...props }: Props) => {
+const AppInput = ({ secureTextEntry = false, style, ...props }: Props) => {
   const { theme } = useTheme();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -112,28 +110,4 @@ const CustomInput = ({ secureTextEntry = false, style, ...props }: Props) => {
   );
 };
 
-export default CustomInput;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-
-    alignItems: 'center',
-
-    borderWidth: 1,
-
-    borderRadius: 14,
-
-    paddingHorizontal: 16,
-
-    marginTop: 10,
-  },
-
-  input: {
-    flex: 1,
-
-    height: 55,
-
-    fontSize: 15,
-  },
-});
+export default AppInput;

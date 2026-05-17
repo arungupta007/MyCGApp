@@ -1,17 +1,11 @@
 import React from 'react';
-
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-
 import ScreenWrapper from '../../components/common/ScreenWrapper';
-
 import { useTheme } from '../../hooks/useTheme';
-
 import { PropertyItem } from '../../types/property';
-import CustomButton from '../../components/common/CustomButton';
+import CustomButton from '../../components/common/AppButton/AppButton';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AppStackParamList } from '../../navigation/types';
 

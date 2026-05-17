@@ -14,9 +14,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import ScreenWrapper from '../../components/common/ScreenWrapper';
 
-import CustomInput from '../../components/common/CustomInput';
-
-import CustomButton from '../../components/common/CustomButton';
+import AppInput from '../../components/common/AppInput/AppInput';
+import AppButton from '../../components/common/AppButton/AppButton';
 
 import { useTheme } from '../../hooks/useTheme';
 
@@ -119,7 +118,7 @@ const ForgotPasswordScreen = () => {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Enter new password"
               secureTextEntry
               value={value}
@@ -154,7 +153,7 @@ const ForgotPasswordScreen = () => {
             validate: value => value === password || 'Passwords do not match',
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Confirm password"
               secureTextEntry
               value={value}
@@ -169,7 +168,7 @@ const ForgotPasswordScreen = () => {
 
         {/* Submit Button */}
 
-        <CustomButton title="Submit" onPress={handleSubmit(onSubmit)} />
+        <AppButton title="Submit" onPress={handleSubmit(onSubmit)} />
       </View>
     </ScreenWrapper>
   );

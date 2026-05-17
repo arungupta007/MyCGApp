@@ -1,33 +1,16 @@
 import React from 'react';
-
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-
 import { Controller, useForm } from 'react-hook-form';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import ScreenWrapper from '../../components/common/ScreenWrapper';
-
-import CustomInput from '../../components/common/CustomInput';
-
-import CustomButton from '../../components/common/CustomButton';
-
+import AppInput from '../../components/common/AppInput/AppInput';
+import AppButton from '../../components/common/AppButton/AppButton';
 import { useTheme } from '../../hooks/useTheme';
-<<<<<<< HEAD
-=======
-
-// import { AuthContext } from '../../store/AuthContext';
->>>>>>> 1d4a312 (initial commit)
 import { useAppDispatch } from '../../redux/hooks';
-
 import { setUser } from '../../redux/slices/authSlice';
 import Toast from 'react-native-toast-message';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-<<<<<<< HEAD
 import { createUser } from '../../database/services/userService';
-=======
-
->>>>>>> 1d4a312 (initial commit)
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 type FormData = {
@@ -93,7 +76,6 @@ const SignupScreen = () => {
       }),
     );
 
-<<<<<<< HEAD
     createUser({
       firstName: data.firstName,
       lastName: data.lastName,
@@ -102,8 +84,6 @@ const SignupScreen = () => {
       address: data.address,
     });
 
-=======
->>>>>>> 1d4a312 (initial commit)
     Toast.show({
       type: 'success',
       position: 'top',
@@ -159,7 +139,7 @@ const SignupScreen = () => {
               required: 'First name is required',
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="First Name"
                 value={value}
                 onChangeText={onChange}
@@ -180,7 +160,7 @@ const SignupScreen = () => {
               required: 'Last name is required',
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Last Name"
                 value={value}
                 onChangeText={onChange}
@@ -206,7 +186,7 @@ const SignupScreen = () => {
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Password"
                 secureTextEntry
                 value={value}
@@ -230,7 +210,7 @@ const SignupScreen = () => {
               validate: value => value === password || 'Passwords do not match',
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Confirm Password"
                 secureTextEntry
                 value={value}
@@ -258,7 +238,7 @@ const SignupScreen = () => {
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -286,7 +266,7 @@ const SignupScreen = () => {
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Phone Number"
                 keyboardType="phone-pad"
                 maxLength={10}
@@ -313,7 +293,7 @@ const SignupScreen = () => {
               },
             }}
             render={({ field: { onChange, value } }) => (
-              <CustomInput
+              <AppInput
                 placeholder="Address"
                 multiline
                 numberOfLines={4}
@@ -354,7 +334,7 @@ const SignupScreen = () => {
 
           {/* Signup Button */}
 
-          <CustomButton title="Signup" onPress={handleSubmit(onSubmit)} />
+          <AppButton title="Signup" onPress={handleSubmit(onSubmit)} />
           <View style={styles.loginContainer}>
             <Text style={styles.loginText}>Already have an account?</Text>
             <Text onPress={handleLoginPress} style={styles.loginLink}>

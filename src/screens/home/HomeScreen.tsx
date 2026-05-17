@@ -4,7 +4,7 @@ import { useTheme } from '../../hooks/useTheme';
 import PropertyCard from '../../components/cards/PropertyCard';
 import { propertyData } from '../../data/propertyData';
 import ScreenWrapper from '../../components/common/ScreenWrapper';
-import Header from '../../components/common/Header';
+import Header from '../../components/common/AppHeader/AppHeader';
 
 const HomeScreen = () => {
   const { theme } = useTheme();

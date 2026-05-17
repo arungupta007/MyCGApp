@@ -4,8 +4,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import ScreenWrapper from '../../components/common/ScreenWrapper';
-import CustomButton from '../../components/common/CustomButton';
-import CustomInput from '../../components/common/CustomInput';
+import AppButton from '../../components/common/AppButton/AppButton';
+import AppInput from '../../components/common/AppInput/AppInput';
 import { AuthContext } from '../../store/AuthContext';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -65,7 +65,7 @@ const LoginScreen = () => {
             },
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Email"
               value={value}
               onChangeText={onChange}
@@ -84,7 +84,7 @@ const LoginScreen = () => {
             required: 'Password is required',
           }}
           render={({ field: { onChange, value } }) => (
-            <CustomInput
+            <AppInput
               placeholder="Password"
               secureTextEntry
               value={value}
@@ -102,7 +102,7 @@ const LoginScreen = () => {
           <Text style={styles.forgotText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        <CustomButton title="Login" onPress={handleSubmit(onSubmit)} />
+        <AppButton title="Login" onPress={handleSubmit(onSubmit)} />
         <View style={styles.signUpContainer}>
           <Text style={styles.signUp}>Don't have an account?</Text>
           <Text onPress={handleSignUpPress} style={styles.signUpLink}>
