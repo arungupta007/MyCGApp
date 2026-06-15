@@ -13,6 +13,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomTabNavigator from './BottomTabNavigator';
 import { DrawerParamList } from './types';
 import { createStyles } from './DrawerNavigatorCSS';
+import AboutCGScreen from '../screens/home/AboutCGScreen/AboutCGScreen';
 
 const Drawer = createDrawerNavigator<DrawerParamList>();
 
@@ -117,10 +118,24 @@ const DrawerNavigator = () => {
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen
-        name="Tabs"
+        name="Home"
         component={BottomTabNavigator}
         options={{
           headerShown: false,
+        }}
+      />
+      <Drawer.Screen
+        name="AboutCG"
+        component={AboutCGScreen}
+        options={{
+          title: 'About CG',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons
+              name="information-circle-outline"
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
     </Drawer.Navigator>
