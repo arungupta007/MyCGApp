@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
-import ScreenWrapper from '../../components/common/ScreenWrapper';
-import AppButton from '../../components/common/AppButton/AppButton';
-import AppInput from '../../components/common/AppInput/AppInput';
-import { AuthContext } from '../../store/AuthContext';
-import { useTheme } from '../../hooks/useTheme';
+import ScreenWrapper from '../../../components/common/ScreenWrapper';
+import AppButton from '../../../components/common/AppButton/AppButton';
+import AppInput from '../../../components/common/AppInput/AppInput';
+import { AuthContext } from '../../../store/AuthContext';
+import { useStyles } from './styles';
 
 type FormData = {
   email: string;
@@ -17,8 +17,7 @@ type FormData = {
 const LoginScreen = () => {
   const { login } = useContext(AuthContext);
   const navigation = useNavigation<NavigationProp<any>>();
-  const { theme } = useTheme();
-  const styles = createStyles(theme);
+  const styles = useStyles();
 
   const {
     control,
@@ -67,6 +66,7 @@ const LoginScreen = () => {
           render={({ field: { onChange, value } }) => (
             <AppInput
               placeholder="Email"
+              testID="email-input"
               value={value}
               onChangeText={onChange}
               keyboardType="email-address"
@@ -86,6 +86,7 @@ const LoginScreen = () => {
           render={({ field: { onChange, value } }) => (
             <AppInput
               placeholder="Password"
+              testID="password-input"
               secureTextEntry
               value={value}
               onChangeText={onChange}
@@ -102,7 +103,11 @@ const LoginScreen = () => {
           <Text style={styles.forgotText}>Forgot Password?</Text>
         </TouchableOpacity>
 
-        <AppButton title="Login" onPress={handleSubmit(onSubmit)} />
+        <AppButton
+          testID="login-button"
+          title="Login"
+          onPress={handleSubmit(onSubmit)}
+        />
         <View style={styles.signUpContainer}>
           <Text style={styles.signUp}>Don't have an account?</Text>
           <Text onPress={handleSignUpPress} style={styles.signUpLink}>
@@ -115,61 +120,3 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
-
-const createStyles = (theme: any) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-
-      paddingHorizontal: 20,
-
-      paddingTop: 20,
-    },
-    title: {
-      fontSize: 28,
-      fontWeight: '700',
-      color: theme.text,
-      margin: 20,
-    },
-    error: {
-      color: '#FF6B6B',
-      marginLeft: 20,
-      marginTop: 5,
-      fontSize: 14,
-    },
-    signUp: {
-      textAlign: 'center',
-      marginTop: 10,
-      color: theme.text,
-      fontSize: 14,
-    },
-    signUpLink: {
-      textAlign: 'center',
-      marginTop: 10,
-      marginLeft: 5,
-      color: theme.primary,
-      fontWeight: '600',
-      fontSize: 14,
-    },
-    signUpContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    forgotContainer: {
-      alignItems: 'flex-end',
-
-      marginHorizontal: 20,
-
-      marginTop: 10,
-
-      marginBottom: 20,
-    },
-
-    forgotText: {
-      color: '#4A90E2',
-
-      fontSize: 14,
-
-      fontWeight: '600',
-    },
-  });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { Controller, useForm } from 'react-hook-form';
 
@@ -12,14 +12,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import ScreenWrapper from '../../components/common/ScreenWrapper';
+import ScreenWrapper from '../../../components/common/ScreenWrapper';
 
-import AppInput from '../../components/common/AppInput/AppInput';
-import AppButton from '../../components/common/AppButton/AppButton';
+import AppInput from '../../../components/common/AppInput/AppInput';
+import AppButton from '../../../components/common/AppButton/AppButton';
 
-import { useTheme } from '../../hooks/useTheme';
+import { useTheme } from '../../../hooks/useTheme';
 
-import { AuthStackParamList } from '../../navigation/types';
+import { AuthStackParamList } from '../../../navigation/types';
+import { useStyles } from './styles';
 
 type FormData = {
   password: string;
@@ -33,6 +34,7 @@ const ForgotPasswordScreen = () => {
   const navigation = useNavigation<NavigationProp>();
 
   const { theme } = useTheme();
+  const styles = useStyles();
 
   const {
     control,
@@ -119,6 +121,7 @@ const ForgotPasswordScreen = () => {
           }}
           render={({ field: { onChange, value } }) => (
             <AppInput
+              testID="password-input"
               placeholder="Enter new password"
               secureTextEntry
               value={value}
@@ -154,6 +157,7 @@ const ForgotPasswordScreen = () => {
           }}
           render={({ field: { onChange, value } }) => (
             <AppInput
+              testID="confirm-password-input"
               placeholder="Confirm password"
               secureTextEntry
               value={value}
@@ -168,54 +172,14 @@ const ForgotPasswordScreen = () => {
 
         {/* Submit Button */}
 
-        <AppButton title="Submit" onPress={handleSubmit(onSubmit)} />
+        <AppButton
+          testID="submit-button"
+          title="Submit"
+          onPress={handleSubmit(onSubmit)}
+        />
       </View>
     </ScreenWrapper>
   );
 };
 
 export default ForgotPasswordScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-
-    paddingHorizontal: 20,
-
-    paddingTop: 20,
-  },
-
-  header: {
-    flexDirection: 'row',
-
-    justifyContent: 'space-between',
-
-    alignItems: 'center',
-
-    marginBottom: 30,
-  },
-
-  headerTitle: {
-    fontSize: 22,
-
-    fontWeight: '700',
-  },
-
-  label: {
-    fontSize: 16,
-
-    fontWeight: '600',
-
-    marginTop: 20,
-
-    marginBottom: 10,
-  },
-
-  error: {
-    color: 'red',
-
-    marginTop: 6,
-
-    marginLeft: 5,
-  },
-});

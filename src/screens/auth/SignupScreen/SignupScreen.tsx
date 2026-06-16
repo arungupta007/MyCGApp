@@ -1,17 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ScreenWrapper from '../../components/common/ScreenWrapper';
-import AppInput from '../../components/common/AppInput/AppInput';
-import AppButton from '../../components/common/AppButton/AppButton';
-import { useTheme } from '../../hooks/useTheme';
-import { useAppDispatch } from '../../redux/hooks';
-import { setUser } from '../../redux/slices/authSlice';
+import ScreenWrapper from '../../../components/common/ScreenWrapper';
+import AppInput from '../../../components/common/AppInput/AppInput';
+import AppButton from '../../../components/common/AppButton/AppButton';
+import { useTheme } from '../../../hooks/useTheme';
+import { useAppDispatch } from '../../../redux/hooks';
+import { setUser } from '../../../redux/slices/authSlice';
 import Toast from 'react-native-toast-message';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { createUser } from '../../database/services/userService';
+import { createUser } from '../../../database/services/userService';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useStyles } from './styles';
 
 type FormData = {
   firstName: string;
@@ -31,8 +32,10 @@ type RootStackParamList = {
 
 const SignupScreen = () => {
   const { theme } = useTheme();
+  const styles = useStyles();
+
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const styles = createStyles(theme);
+  // const styles = createStyles(theme);
   const dispatch = useAppDispatch();
 
   // const { login } = useContext(AuthContext);
@@ -140,6 +143,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="firstname-input"
                 placeholder="First Name"
                 value={value}
                 onChangeText={onChange}
@@ -161,6 +165,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="lastname-input"
                 placeholder="Last Name"
                 value={value}
                 onChangeText={onChange}
@@ -187,6 +192,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="password-input"
                 placeholder="Password"
                 secureTextEntry
                 value={value}
@@ -211,6 +217,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="confirm-password-input"
                 placeholder="Confirm Password"
                 secureTextEntry
                 value={value}
@@ -239,6 +246,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="email-input"
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -267,6 +275,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="phone-input"
                 placeholder="Phone Number"
                 keyboardType="phone-pad"
                 maxLength={10}
@@ -294,6 +303,7 @@ const SignupScreen = () => {
             }}
             render={({ field: { onChange, value } }) => (
               <AppInput
+                testID="address-input"
                 placeholder="Address"
                 multiline
                 numberOfLines={4}
@@ -311,6 +321,7 @@ const SignupScreen = () => {
           {/* Terms & Conditions */}
 
           <TouchableOpacity
+            testID="terms-checkbox"
             style={styles.termsContainer}
             onPress={() => setValue('acceptTerms', !acceptTerms)}
           >
@@ -334,7 +345,11 @@ const SignupScreen = () => {
 
           {/* Signup Button */}
 
-          <AppButton title="Signup" onPress={handleSubmit(onSubmit)} />
+          <AppButton
+            testID="signup-button"
+            title="Signup"
+            onPress={handleSubmit(onSubmit)}
+          />
           <View style={styles.loginContainer}>
             <Text style={styles.loginText}>Already have an account?</Text>
             <Text onPress={handleLoginPress} style={styles.loginLink}>
@@ -348,67 +363,3 @@ const SignupScreen = () => {
 };
 
 export default SignupScreen;
-
-const createStyles = (theme: any) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-
-      paddingHorizontal: 20,
-
-      paddingTop: 20,
-    },
-
-    title: {
-      fontSize: 30,
-
-      fontWeight: '700',
-
-      marginBottom: 30,
-    },
-
-    error: {
-      color: 'red',
-
-      marginTop: 5,
-
-      marginLeft: 5,
-    },
-
-    termsContainer: {
-      flexDirection: 'row',
-
-      alignItems: 'center',
-
-      marginTop: 20,
-    },
-
-    termsText: {
-      marginLeft: 10,
-
-      fontSize: 14,
-    },
-    loginContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginTop: 16,
-    },
-    loginText: {
-      textAlign: 'center',
-      color: theme.text,
-      fontSize: 14,
-    },
-    loginLink: {
-      textAlign: 'center',
-      // color: theme.primary || '#007AFF',
-      color: theme.primary,
-      marginLeft: 5,
-      fontSize: 14,
-      fontWeight: '600',
-    },
-    addressInput: {
-      height: 120,
-      textAlignVertical: 'top',
-      paddingTop: 14,
-    },
-  });

@@ -5,11 +5,12 @@ import { styles } from './styles';
 type Props = {
   title: string;
   onPress: (event: GestureResponderEvent) => void;
+  testID?: string;
 };
 
-const AppButton = ({ title, onPress }: Props) => {
+const AppButton = ({ title, onPress, testID }: Props) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style={styles.button} onPress={onPress} testID={testID}>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
