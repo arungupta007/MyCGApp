@@ -58,5 +58,20 @@ export const useStyles = () => {
 
       fontWeight: '600',
     },
+    googleButton: {
+      height: 50,
+      borderWidth: 1,
+      borderColor: '#4285F4',
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 16,
+    },
+
+    googleText: {
+      color: '#4285F4',
+      fontSize: 16,
+      fontWeight: '600',
+    },
   });
 };

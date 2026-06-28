@@ -16,8 +16,12 @@ import { store } from './src/redux/store';
 import { useEffect } from 'react';
 
 import NotificationService from './src/services/notificationService';
+import { configureGoogleSignin } from './src/config/googleSignIn';
 
 const App = () => {
+  useEffect(() => {
+    configureGoogleSignin();
+  }, []);
   useEffect(() => {
     NotificationService.requestPermission();
     //push notification test

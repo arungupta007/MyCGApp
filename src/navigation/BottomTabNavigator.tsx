@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../screens/home/HomeScreen';
+import HomeScreen from '../screens/home/HomeScreen.tsx';
 
 import AppointmentsScreen from '../screens/home/AppointmentsScreen';
 

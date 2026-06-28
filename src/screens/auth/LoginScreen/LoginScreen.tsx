@@ -3,6 +3,10 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import ScreenWrapper from '../../../components/common/ScreenWrapper';
 import AppButton from '../../../components/common/AppButton/AppButton';
 import AppInput from '../../../components/common/AppInput/AppInput';
@@ -46,6 +50,40 @@ const LoginScreen = () => {
 
   const handleSignUpPress = () => {
     navigation.navigate('Signup');
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+
+      const response = await GoogleSignin.signIn();
+
+      console.log('Google User => ', response.data?.user);
+
+      login();
+
+      Toast.show({
+        type: 'success',
+        text1: 'Google Login Successful',
+        text2: response.data?.user?.name || '',
+      });
+
+      navigation.navigate('Home');
+    } catch (error: any) {
+      console.log(error);
+
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        Toast.show({
+          type: 'error',
+          text1: 'Login Cancelled',
+        });
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: 'Google Login Failed',
+        });
+      }
+    }
   };
 
   return (
@@ -108,6 +146,18 @@ const LoginScreen = () => {
           title="Login"
           onPress={handleSubmit(onSubmit)}
         />
+        {/* <AppButton
+          title="Login"
+          testID="login-button"
+          onPress={handleSubmit(onSubmit)}
+        /> */}
+
+        <TouchableOpacity
+          style={styles.googleButton}
+          onPress={handleGoogleLogin}
+        >
+          <Text style={styles.googleText}>Continue with Google</Text>
+        </TouchableOpacity>
         <View style={styles.signUpContainer}>
           <Text style={styles.signUp}>Don't have an account?</Text>
           <Text onPress={handleSignUpPress} style={styles.signUpLink}>
